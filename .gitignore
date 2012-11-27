@@ -1,0 +1,5 @@
+# Hidden files
+.idea
+*.iml
+.DS_Store
+*~
