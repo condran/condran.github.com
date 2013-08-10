@@ -1,139 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Paul Condran</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+---
+layout: default
+title: Paul Condran
+---
 
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="css/custom.css" rel="stylesheet" type="text/css">
+    <div class="row">
+        <!-- Articles list -->
+        <div class="span6">
+            <div class="title portfolio_title">portfolio</div>
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="img/instagram_me.jpg" class="img-polaroid" width="100">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">About Paul</h4>
+                    <p>
+                        Hi there. I'm Paul, a Java programmer by and in my spare time I enjoy making
+                        games, and playing around with Illustrator &amp; Photoshop.
+                        I also like the occasional whisky.
+                    </p>
+                </div>
+            </div>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
-    <script src="http://use.edgefonts.net/pt-serif.js"></script>
-    <script src="http://use.edgefonts.net/open-sans.js"></script>
+        </div>
 
-    <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">-->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">-->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">-->
-    <!--<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
-</head>
-
-<body>
-
-<div class="container-narrow">
-
-    <div class="pull-left">
-        <img class="img-circle" src="http://www.gravatar.com/avatar/24b6f9c3b4cb32adec5cbc853409ddb7?s=200">
-    </div>
-    <div class="jumbotron">
-        <h1>Paul Condran</h1>
-    </div>
-
-    <!-- Zombie Head Feature -->
-    <hr class="featurette-divider">
-    <div class="row-fluid">
-        <div class="featurette">
-            <img class="featurette-image pull-right img-circle" src="img/zombiehead.png" width="300px" height="300px">
-
-            <h2 class="featurette-heading">Zombie Head!</h2>
-
-            <p class="lead">GitHub GameOff 2012</p>
-
-            <p>A strange mist has descended the area and zombie heads are rolling in!</p>
-
-            <p>Lucky you have a secret weapon, the Forkinator!.</p>
-
-            <p>
-                <span class="span2"><iframe
-                        src="http://ghbtns.com/github-btn.html?user=condran&type=follow&size=large&repo=game-off-2012&type=fork"
-                        allowtransparency="true" frameborder="0" scrolling="0" width="175" height="30"></iframe></span>
-                <span class="span2"> <a href="http://paulcondran.com/game-off-2012" class="btn btn-primary"> Play
-                    Game </a> </span>
-            </p>
+        <!-- Articles list -->
+        <div class="span6">
+            <div class="title article_title">articles</div>
+            <!-- Blog Links -->
+            {% for post in site.posts %}
+            <div class="row">
+                <div class="span4">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                </div>
+                <div class="span2">{{ post.date | date: "%d %b %Y" }}</div>								
+            </div>
+			<small><em>{{ post.summary }}</em></small>
+            <hr />
+            {% endfor %}
         </div>
     </div>
-
-    <!-- Profile -->
-    <hr>
-    <div class="row-fluid">
-        <h2> About Me</h2>
-
-        <p> In my spare time I can be found attempting to draw in Illustrator, writing code, or enjoying a scotch. </p>
-
-
-
-    </div>
-
-
-    <!-- Contact cards -->
-    <div class="row-fluid">
-
-        <p>Other sites you can find me include: </p>
-
-        <ul class="thumbnails">
-            <li class="span3">
-                <div class="thumbnail" style="background-color:#fff">
-                    <a href="http://twitter.com/condran">
-                        <img src="img/twitter-bird-white-on-blue.png" alt="" class="img-circle"></a>
-
-                    <h3>Tweet</h3>
-
-                    <p>
-                        You can hear what I have to say on twitter.
-                    </p>
-                    <a href="http://twitter.com/condran">@condran</a>
-                </div>
-            </li>
-            <li class="span3">
-                <div class="thumbnail" style="background-color:#fff">
-                    <a href="http://instagram.com/condran"><img src="img/instagram_me.jpg" alt=""
-                                                                class="img-circle"></a>
-
-                    <h3>Photos</h3>
-
-                    <p>
-                        Sometimes I take photos on Instagram
-                    </p>
-                    <a href="http://instagram.com/condran">condran</a>
-                </div>
-            </li>
-            <li class="span3">
-                <div class="thumbnail" style="background-color:#fff">
-                    <a href="http://github.com/condran"><img src="img/octotron.jpg" alt="" class="img-circle"></a>
-
-                    <h3>Code</h3>
-
-                    <p>
-                        Check out my projects on GitHub!
-                    </p>
-                    <a href="http://github.com/condran">@condran</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-
-    <div class="footer">
-    </div>
-
-</div>
-<!-- /container -->
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/custom.js"></script>
-
-</body>
-</html>

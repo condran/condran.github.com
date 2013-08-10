@@ -1,7 +1,114 @@
 body {
     padding-top: 20px;
     padding-bottom: 40px;
-    background: url(../img/robots.png) repeat;
+    background: url(../img/cream_dust.png) repeat;
+    background-size: 50px 50px;
+}
+
+footer {
+}
+
+
+.hero-unit {
+    color: #FF6C57;
+    background-color: #151a2d;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.blog-unit {
+    padding: 40px 20px;
+}
+
+/*
+ 2.0 dpr
+ Retina-specific stuff here
+*/
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi){
+
+    /*.hero-unit {*/
+        /*background: url(../img/retina_dust_@2X.png) repeat;*/
+        /*background-size: 200px 200px;*/
+    /*}*/
+
+    body {
+        background: url(../img/cream_dust_@2X.png) repeat;
+        background-size: 50px 50px;
+    }
+}
+
+footer a, footer a:visited {
+    color: #f1f1f1;
+}
+/*
+.social-icons {
+    position: absolute;
+    top: 5px;
+    left: 40px;
+}
+*/
+.social-icons {
+    text-align: center;
+}
+
+
+.social-icons .icon-2x.icon-border {
+    -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+            border-radius: 50%;
+}
+
+.title {
+    font-size: 38.5px;
+    font-weight: bold;
+    border-bottom: 4px solid #FF6C57;
+}
+
+.circle {
+    background-color: #FF6C57;
+    -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+            border-radius: 50%;
+     width: 42px;
+    height: 42px;
+    display: inline-block;
+}
+
+.article_title {
+    border-bottom: 4px solid #a37ef2;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.portfolio_title {
+    border-bottom: 4px solid #57eeff;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.social-icons i {
+    position: relative;
+    top: 6px;
+}
+
+.social-icons a, .social-icons a:visited {
+    color: #151a2d;
+    /*padding: 10px;*/
+    /*margin: 5px;*/
+
+    /*text-align: center;*/
+    text-decoration: none;
+    /*vertical-align: middle;*/
+}
+.social-icons a:hover {
+    color: #fefefe;
+
+    /*background-color: #151a2d;*/
+    /*text-align: center;*/
+    /*padding: 10px;*/
+    /*margin: 5px;*/
 }
 
 /* Custom container */

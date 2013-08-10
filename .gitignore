@@ -3,3 +3,6 @@
 *.iml
 .DS_Store
 *~
+
+# Jekyll
+_site

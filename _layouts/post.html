@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Paul Condran &middot; {{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../../../css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../../css/custom.css" rel="stylesheet" type="text/css">
+    <link href="../../../css/pygments.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../../css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../../../css/font-awesome-ie7.min.css">
+    <![endif]-->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">-->
+    <!--<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="span10" style="height:50px;">
+            <span class="title">condran</span>
+        </div>
+        <div class="span2 pagination-right">
+            <div class="social-icons">
+                <span>
+                    <a href="http://paulcondran.com" title="home page" class="circle">
+                        <i class="circle  icon-home icon-2x"></i>
+                    </a>
+                </span>
+                <span>
+                    <a href="http://github.com/condran" title="@condran on github" class="circle">
+                        <i class="circle  icon-github-alt icon-2x"></i>
+                    </a>
+                </span>
+                <span>
+                    <a href="http://twitter.com/condran" title="@condran on twitter" class="circle">
+                        <i class="circle  icon-twitter icon-2x"></i>
+                    </a>
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero-unit blog-unit">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+
+                <h2 class="featurette-heading">{{ page.title }}</h2>
+
+                <p>{{ page.summary }}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="span2"></div>
+        <div class="span10">
+            {% if page.image %}
+            <img src="{{ page.image }}" class="span4 img-circle pull-right" />
+            {% endif %}
+            {{ content }}
+        </div>
+    </div>
+</div>
+
+<!--
+<footer>
+    <div class="container">
+        <div class="span4">
+
+        </div>
+        <div class="span4">
+
+        </div>
+        <div class="span4">
+
+        </div>
+    </div>
+</footer>
+ -->
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/custom.js"></script>-->
+
+</body>
+</html>
