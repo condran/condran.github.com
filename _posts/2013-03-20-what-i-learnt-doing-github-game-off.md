@@ -30,8 +30,8 @@ I broke down the game into some milestones into stages I was happy to complete. 
  * Only once I was satisfied with the basic gameplay, add some particle effects
  * Lastly, add the sound (it was the one thing I hadn’t done before, and was willing to finish without)
 
-## 4. When the going gets tough, take a deep breath and meditate
-Well, maybe not meditate but don’t get too anxious. Perhaps this comes with experience in programming within the corporate world but don’t let time pressures rush what you are doing. The worst thing you can do is stress out over some buggy code. Fortunately when the code was pissing me off I could dive into some artwork.
+## 4. When the going gets tough, take a deep breath
+Perhaps this comes with experience in programming within the corporate world but don’t let time pressures rush what you are doing. The worst thing you can do is stress out over some buggy code. Fortunately when the code was pissing me off I could dive into some artwork.
 
 ## 5. The best way to learn is by doing
 While I am very interested in illustration, I am just a novice at it. So this game was as much an opportunity for me to practice illustrating as well as creating a game. Thankfully these days there are so many tutorials out there on how to do things and achieve various effects that it just took time and patience to get things looking somewhat decent.
