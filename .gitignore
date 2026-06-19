@@ -6,3 +6,5 @@
 
 # Jekyll
 _site
+.bundle
+vendor

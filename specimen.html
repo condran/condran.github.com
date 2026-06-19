@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Type Specimen — Paul Condran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Josefin+Sans:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FAFAF8;
+    --bg-warm: #F5F4F0;
+    --text: #1a1a1a;
+    --text-secondary: #6b6560;
+    --text-tertiary: #9e9891;
+    --accent: #c4653a;
+    --accent-light: #e8d5ca;
+    --rule: #ddd8d0;
+    --rule-light: #eae6e0;
+    --code-bg: #f0ede8;
+
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Newsreader', serif;
+    --font-ui: 'Instrument Sans', sans-serif;
+    --font-accent: 'Josefin Sans', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+  }
+
+  [data-theme="dark"] {
+    --bg: #161514;
+    --bg-warm: #1c1b19;
+    --text: #e8e4df;
+    --text-secondary: #9e9590;
+    --text-tertiary: #6b6460;
+    --accent: #d4825e;
+    --accent-light: #3d2a1f;
+    --rule: #2e2b28;
+    --rule-light: #252220;
+    --code-bg: #1f1d1b;
+  }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.4s ease, color 0.3s ease;
+  }
+
+  /* ─── Theme Toggle ─── */
+  .theme-toggle {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .theme-toggle__track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: var(--rule);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .theme-toggle__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    background: var(--bg);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  [data-theme="dark"] .theme-toggle__track {
+    background: var(--accent);
+  }
+
+  [data-theme="dark"] .theme-toggle__thumb {
+    transform: translateX(16px);
+    background: var(--bg);
+  }
+
+  .theme-toggle__label {
+    font-family: var(--font-ui);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    transition: color 0.3s ease;
+    min-width: 2.5em;
+  }
+
+  .theme-toggle:hover .theme-toggle__track {
+    background: var(--text-tertiary);
+  }
+
+  [data-theme="dark"] .theme-toggle:hover .theme-toggle__track {
+    background: var(--accent);
+    filter: brightness(1.15);
+  }
+
+  /* Transition helpers for smooth theme change */
+  .page-header,
+  .section,
+  .page-footer,
+  .specimen-nav__link,
+  .type-sample--code,
+  .hierarchy__code,
+  .card__code,
+  .hierarchy__tag {
+    transition: background-color 0.4s ease, color 0.3s ease, border-color 0.4s ease;
+  }
+
+  /* ─── Page Header ─── */
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-header__label {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header__title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin-bottom: 1rem;
+  }
+
+  .page-header__subtitle {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 560px;
+  }
+
+  /* ─── Sections ─── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section + .section { border-top: 1px solid var(--rule-light); }
+
+  .section__number {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section__title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+
+  .section__desc {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 520px;
+    line-height: 1.55;
+  }
+
+  /* ─── Type System Overview ─── */
+  .type-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 2rem 0;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .type-row:last-child { padding-bottom: 0; }
+
+  .type-meta {
+    position: relative;
+    top: 0.15em;
+  }
+
+  .type-meta__role {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .type-meta__name {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  .type-sample--display {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .type-sample--display-italic {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.4rem;
+    line-height: 1.15;
+  }
+
+  .type-sample--body {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.65;
+    max-width: 520px;
+  }
+
+  .type-sample--ui {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    color: var(--text-secondary);
+  }
+
+  .type-sample--ui span { margin-right: 2rem; }
+
+  .type-sample--accent {
+    font-family: var(--font-accent);
+    font-weight: 300;
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .type-sample--code {
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    background: var(--code-bg);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+  }
+
+  /* ─── Hierarchy Demo ─── */
+  .hierarchy {
+    max-width: 680px;
+  }
+
+  .hierarchy__site-title {
+    font-family: var(--font-accent);
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 3rem;
+  }
+
+  .hierarchy__article-title {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.75rem;
+  }
+
+  .hierarchy__subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .hierarchy__meta {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hierarchy__meta-sep {
+    width: 3px;
+    height: 3px;
+    background: var(--text-tertiary);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hierarchy__tag {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent-light);
+    padding: 0.2em 0.6em;
+    border-radius: 2px;
+  }
+
+  .hierarchy__body {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .hierarchy__body--drop-cap::first-letter {
+    font-family: var(--font-display);
+    font-size: 3.6em;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.05em;
+    color: var(--text);
+  }
+
+  .hierarchy__code {
+    font-family: var(--font-code);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    background: var(--code-bg);
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .hierarchy__caption {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    font-weight: 400;
+    line-height: 1.5;
+    border-left: 2px solid var(--rule);
+    padding-left: 0.75rem;
+  }
+
+  /* ─── Context Cards ─── */
+  .context-cards {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .card {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .card:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .card__category {
+    font-family: var(--font-ui);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .card__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+
+  .card__deck {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .card__meta {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card__body {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 620px;
+  }
+
+  .card__body p + p { margin-top: 1em; }
+
+  .card__code {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    background: var(--code-bg);
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+  }
+
+  .card__pullquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    max-width: 500px;
+  }
+
+  .card__body em { font-style: italic; }
+
+  /* ─── Font Details ─── */
+  .charset {
+    margin-bottom: 3rem;
+  }
+
+  .charset__label {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .charset__display {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1.35;
+    letter-spacing: 0.03em;
+    word-break: break-all;
+    margin-bottom: 0.5rem;
+  }
+
+  .charset__newsreader {
+    font-family: var(--font-body);
+    font-size: 1.6rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    word-break: break-all;
+  }
+
+  .weight-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .weight-row__num {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  .weight-row__sample {
+    font-family: var(--font-body);
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+
+  .weight-row__sample-italic {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  /* ─── Footer ─── */
+  .page-footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .page-footer__text {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  /* ─── Nav ─── */
+  .specimen-nav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+  }
+
+  .specimen-nav__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-end;
+  }
+
+  .specimen-nav__link {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    padding: 0.2em 0;
+    transition: color 0.2s ease;
+  }
+
+  .specimen-nav__link:hover { color: var(--text); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+
+    .page-header { padding: 3rem 1.5rem 2rem; }
+    .page-header__title { font-size: 2.5rem; }
+    .section { padding: 3rem 1.5rem; }
+    .section__title { font-size: 1.6rem; }
+
+    .type-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .type-sample--display { font-size: 2.2rem; }
+    .hierarchy__article-title { font-size: 2.2rem; }
+    .card__title { font-size: 1.6rem; }
+    .charset__display { font-size: 1.5rem; }
+    .specimen-nav { display: none; }
+    .theme-toggle { top: auto; bottom: 1.5rem; left: 1.5rem; }
+
+    .weight-row {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+
+  /* ─── Subtle entrance ─── */
+  @media (prefers-reduced-motion: no-preference) {
+    .section {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .section:nth-child(2) { animation-delay: 0.08s; }
+    .section:nth-child(3) { animation-delay: 0.14s; }
+    .section:nth-child(4) { animation-delay: 0.2s; }
+    .section:nth-child(5) { animation-delay: 0.26s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
+<script>
+  // Apply theme before paint to prevent flash
+  (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+</head>
+<body>
+
+<div class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode" tabindex="0">
+  <div class="theme-toggle__track">
+    <div class="theme-toggle__thumb"></div>
+  </div>
+  <span class="theme-toggle__label">Light</span>
+</div>
+
+<nav class="specimen-nav" aria-label="Sections">
+  <ul class="specimen-nav__list">
+    <li><a class="specimen-nav__link" href="#system">System</a></li>
+    <li><a class="specimen-nav__link" href="#hierarchy">Hierarchy</a></li>
+    <li><a class="specimen-nav__link" href="#context">In Context</a></li>
+    <li><a class="specimen-nav__link" href="#details">Details</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HEADER ═══ -->
+<header class="page-header">
+  <p class="page-header__label">Type Specimen</p>
+  <h1 class="page-header__title">Five fonts, one voice</h1>
+  <p class="page-header__subtitle">A typographic system for writing about technology, creative fiction, and philosophy. Editorial restraint meets modern web.</p>
+</header>
+
+<!-- ═══ SECTION 1: TYPE SYSTEM ═══ -->
+<section class="section" id="system">
+  <p class="section__number">01</p>
+  <h2 class="section__title">Type System</h2>
+  <p class="section__desc">Each font has a role. Together they create a hierarchy that lets content breathe and the writing speak.</p>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">Display</p>
+      <p class="type-meta__name">Instrument Serif<br>Regular</p>
+    </div>
+    <div class="type-sample--display">The act of writing is the act of discovering what you believe.</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">Display</p>
+      <p class="type-meta__name">Instrument Serif<br>Italic</p>
+    </div>
+    <div class="type-sample--display-italic">Somewhere between the signal and the noise, meaning takes shape.</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">Body</p>
+      <p class="type-meta__name">Newsreader<br>300–700</p>
+    </div>
+    <div class="type-sample--body">Good prose is like a windowpane. The reader should look through the writing, not at it. Newsreader was designed for sustained on-screen reading — the kind of quiet attention that long essays demand. Its moderate contrast and generous x-height keep the eye moving without fatigue.</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">UI</p>
+      <p class="type-meta__name">Instrument Sans<br>400 · 500 · 600</p>
+    </div>
+    <div class="type-sample--ui">
+      <span style="font-weight:400">Regular 400 — Navigation, dates, captions</span><br>
+      <span style="font-weight:500">Medium 500 — Labels, metadata, tags</span><br>
+      <span style="font-weight:600">SemiBold 600 — Section markers, emphasis</span>
+    </div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">Accent</p>
+      <p class="type-meta__name">Josefin Sans<br>Light 300</p>
+    </div>
+    <div class="type-sample--accent">Paul Condran</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">
+      <p class="type-meta__role">Code</p>
+      <p class="type-meta__name">JetBrains Mono<br>400 · 500</p>
+    </div>
+    <div class="type-sample--code">const meaning = await observe(world);<br>return meaning.filter(signal =&gt; signal.depth &gt; noise);</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: HIERARCHY ═══ -->
+<section class="section" id="hierarchy">
+  <p class="section__number">02</p>
+  <h2 class="section__title">Scale &amp; Hierarchy</h2>
+  <p class="section__desc">A realistic page layout demonstrating how each level of the type system works together in practice.</p>
+
+  <div class="hierarchy">
+    <p class="hierarchy__site-title">Paul Condran</p>
+
+    <h3 class="hierarchy__article-title">On the Poetics of Source Code</h3>
+    <p class="hierarchy__subtitle">Why reading programs as literature reveals hidden structures of thought</p>
+
+    <div class="hierarchy__meta">
+      <span>14 February 2026</span>
+      <span class="hierarchy__meta-sep"></span>
+      <span>8 min read</span>
+      <span class="hierarchy__meta-sep"></span>
+      <span class="hierarchy__tag">Technology</span>
+      <span class="hierarchy__tag">Philosophy</span>
+    </div>
+
+    <p class="hierarchy__body hierarchy__body--drop-cap">There is an old idea, mostly forgotten, that source code is a form of literature. Not metaphorically — literally. Donald Knuth called it "literate programming," and he meant it as a practice: write your programs as essays, weaving explanation and execution into a single document that a human would want to read.</p>
+
+    <p class="hierarchy__body">The idea never caught on in industry. But it haunts the margins of computer science like a ghost of a better future. When you read a well-written function, something happens that is closer to reading a poem than solving an equation. The variable names carry connotation. The structure implies argument. The whitespace breathes.</p>
+
+    <div class="hierarchy__code">// A function that reads like a sentence<br>function distillMeaning(observations) {<br>  const significant = observations<br>    .filter(o =&gt; o.signal &gt; o.noise)<br>    .map(o =&gt; o.essence);<br><br>  return compose(significant);<br>}</div>
+
+    <p class="hierarchy__caption">Listing 1 — Even in its compressed form, code can carry the cadence of natural language. The choice of <em>distillMeaning</em> over <em>processData</em> is a literary decision.</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: CONTEXT ═══ -->
+<section class="section" id="context">
+  <p class="section__number">03</p>
+  <h2 class="section__title">Pairings in Context</h2>
+  <p class="section__desc">Three essays, three registers. The same type system adapts to technology, fiction, and philosophy.</p>
+
+  <div class="context-cards">
+
+    <!-- Technology -->
+    <article class="card">
+      <p class="card__category">Technology</p>
+      <h3 class="card__title">Against Opinionated Frameworks</h3>
+      <p class="card__deck">The hidden cost of letting your tools think for you</p>
+      <div class="card__meta">
+        <span>8 January 2026</span>
+        <span class="hierarchy__meta-sep"></span>
+        <span>12 min read</span>
+      </div>
+      <div class="card__body">
+        <p>Every framework encodes a philosophy. When Rails says "convention over configuration," it is making an argument about the relationship between the programmer and the machine — that decisions are a cost, that consistency is a value, that the individual should yield to the collective pattern.</p>
+
+        <div class="card__code">// The framework decides for you<br>export default defineConfig({<br>  routes: "file-system",<br>  styling: "tailwind",<br>  deployment: "edge",<br>  opinions: "strong",<br>});</div>
+
+        <p>This is not neutral. When we adopt these tools, we are not merely choosing a technical stack — we are accepting an epistemology. The question is whether we have examined it first, or simply installed it.</p>
+      </div>
+    </article>
+
+    <!-- Creative Writing -->
+    <article class="card">
+      <p class="card__category">Creative Writing</p>
+      <h3 class="card__title">The Cartographer's Daughter</h3>
+      <p class="card__deck">A story about inherited landscapes and the limits of representation</p>
+      <div class="card__meta">
+        <span>22 November 2025</span>
+        <span class="hierarchy__meta-sep"></span>
+        <span>Fiction</span>
+      </div>
+      <div class="card__body">
+        <p>My father drew coastlines for a living. Not the real ones — the ones that appeared on maps, which is a different thing entirely. A real coastline is fractal, infinite, uncapturable. A map coastline is a decision: <em>this is where the land ends</em>. Every morning he would sit at his desk with a magnifying glass and a pen whose nib was finer than a human hair, and he would decide where England stopped and the sea began.</p>
+
+        <div class="card__pullquote">A map coastline is a decision: this is where the land ends.</div>
+
+        <p>I did not understand, as a child, that this was an act of profound authority. To draw a border is to assert a truth that the landscape itself refuses to confirm. The tide comes in. The tide goes out. The coastline moves. But the map stays still, and we believe the map.</p>
+      </div>
+    </article>
+
+    <!-- Philosophy -->
+    <article class="card">
+      <p class="card__category">Philosophy</p>
+      <h3 class="card__title">Attention as Moral Practice</h3>
+      <p class="card__deck">Simone Weil, iris Murdoch, and the ethics of looking carefully</p>
+      <div class="card__meta">
+        <span>3 March 2026</span>
+        <span class="hierarchy__meta-sep"></span>
+        <span>16 min read</span>
+      </div>
+      <div class="card__body">
+        <p>Simone Weil wrote that attention, taken to its highest degree, is the same thing as prayer. This is a strange claim, and it is worth sitting with its strangeness before trying to explain it away. She did not mean that attention <em>resembles</em> prayer, or that it <em>functions like</em> prayer. She meant that the two are identical — that to attend fully to another person, or to a mathematical proof, or to the beauty of a landscape, is to perform the same act that the mystic performs in contemplation.</p>
+
+        <p>Iris Murdoch took this idea in a secular direction. For Murdoch, the moral life is not primarily about choosing and acting. It is about <em>seeing</em>. The quality of our attention determines the quality of our action. A mother who gradually comes to see her daughter-in-law clearly — not through the fog of jealousy and snobbery, but as she actually is — has done moral work, even though nothing outwardly has changed.</p>
+
+        <div class="card__pullquote">The quality of our attention determines the quality of our action.</div>
+
+        <p>Both thinkers suggest something radical: that the most important thing we do is not what we decide, but what we notice. The moral agent is not primarily a chooser but a witness.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: FONT DETAILS ═══ -->
+<section class="section" id="details">
+  <p class="section__number">04</p>
+  <h2 class="section__title">Font Details</h2>
+  <p class="section__desc">Character sets, weight variations, and the raw materials of the type system.</p>
+
+  <!-- Instrument Serif -->
+  <div class="charset">
+    <p class="charset__label">Instrument Serif — Character Set</p>
+    <div class="charset__display">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+    <div class="charset__display">abcdefghijklmnopqrstuvwxyz</div>
+    <div class="charset__display">0123456789</div>
+    <div class="charset__display" style="font-size:1.8rem; letter-spacing:0.08em;">!@#$%&amp;*()—–""''.,;:?/…·</div>
+  </div>
+
+  <!-- Instrument Serif Italic -->
+  <div class="charset">
+    <p class="charset__label">Instrument Serif — Italic</p>
+    <div class="charset__display" style="font-style:italic">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+    <div class="charset__display" style="font-style:italic">abcdefghijklmnopqrstuvwxyz</div>
+    <div class="charset__display" style="font-style:italic">0123456789</div>
+  </div>
+
+  <!-- Newsreader -->
+  <div class="charset">
+    <p class="charset__label">Newsreader — Character Set</p>
+    <div class="charset__newsreader">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+    <div class="charset__newsreader">abcdefghijklmnopqrstuvwxyz</div>
+    <div class="charset__newsreader">0123456789</div>
+    <div class="charset__newsreader" style="font-size:1.3rem; letter-spacing:0.06em;">!@#$%&amp;*()—–""''.,;:?/…·</div>
+  </div>
+
+  <!-- Newsreader Weights -->
+  <div style="margin-top:3rem">
+    <p class="charset__label" style="margin-bottom:1.5rem">Newsreader — Weight Variations</p>
+
+    <div class="weight-row">
+      <span class="weight-row__num">Light 300</span>
+      <div>
+        <div class="weight-row__sample" style="font-weight:300">The quality of our attention determines the quality of our action.</div>
+        <div class="weight-row__sample-italic" style="font-weight:300">The quality of our attention determines the quality of our action.</div>
+      </div>
+    </div>
+
+    <div class="weight-row">
+      <span class="weight-row__num">Regular 400</span>
+      <div>
+        <div class="weight-row__sample" style="font-weight:400">The quality of our attention determines the quality of our action.</div>
+        <div class="weight-row__sample-italic" style="font-weight:400">The quality of our attention determines the quality of our action.</div>
+      </div>
+    </div>
+
+    <div class="weight-row">
+      <span class="weight-row__num">Medium 500</span>
+      <div>
+        <div class="weight-row__sample" style="font-weight:500">The quality of our attention determines the quality of our action.</div>
+        <div class="weight-row__sample-italic" style="font-weight:500">The quality of our attention determines the quality of our action.</div>
+      </div>
+    </div>
+
+    <div class="weight-row">
+      <span class="weight-row__num">Semi 600</span>
+      <div>
+        <div class="weight-row__sample" style="font-weight:600">The quality of our attention determines the quality of our action.</div>
+        <div class="weight-row__sample-italic" style="font-weight:600">The quality of our attention determines the quality of our action.</div>
+      </div>
+    </div>
+
+    <div class="weight-row">
+      <span class="weight-row__num">Bold 700</span>
+      <div>
+        <div class="weight-row__sample" style="font-weight:700">The quality of our attention determines the quality of our action.</div>
+        <div class="weight-row__sample-italic" style="font-weight:700">The quality of our attention determines the quality of our action.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="page-footer">
+  <p class="page-footer__text">
+    Type specimen for paulcondran.com redesign. All fonts served via Google Fonts — open source, free for web use.<br>
+    Instrument Serif · Newsreader · Instrument Sans · Josefin Sans · JetBrains Mono
+  </p>
+</footer>
+
+<script>
+(function() {
+  const toggle = document.querySelector('.theme-toggle');
+  const label = toggle.querySelector('.theme-toggle__label');
+  const root = document.documentElement;
+
+  // Check for saved preference, then system preference
+  function getPreferred() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function setTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+    toggle.setAttribute('aria-checked', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }
+
+  // Apply immediately (no flash)
+  setTheme(getPreferred());
+
+  toggle.addEventListener('click', function() {
+    const current = root.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  toggle.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle.click();
+    }
+  });
+
+  // Respect system changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+})();
+</script>
+</body>
+</html>
